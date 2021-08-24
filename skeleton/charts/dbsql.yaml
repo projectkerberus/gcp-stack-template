@@ -1,0 +1,19 @@
+apiVersion: database.gcp.crossplane.io/v1beta1
+kind: CloudSQLInstance
+metadata:
+  name: ${{values.cloudSqlRef}}
+  labels:
+    backstage.io/kubernetes-id: ${{values.component_id}}
+spec:
+  forProvider:
+    databaseVersion: ${{values.cloudSqlDatabaseVersion}}
+    region: ${{values.cloudSqlRegion}}
+    settings:
+      tier: ${{values.cloudSqlTier}}
+      dataDiskType: ${{values.cloudSqlDataDiskType}}
+      dataDiskSizeGb: ${{values.cloudSqlDataDiskSizeGb}}
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: cloudsqlpostgresql-conn
+  providerConfigRef:
+    name: gcp-stack-template-provider-${{values.gcpProject}}

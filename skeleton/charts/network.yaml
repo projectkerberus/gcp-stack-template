@@ -1,0 +1,35 @@
+---
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Network
+metadata:
+  name: ${{values.networkRef}}
+  labels:
+    backstage.io/kubernetes-id: ${{values.component_id}}
+spec:
+  forProvider:
+    autoCreateSubnetworks: false
+    routingConfig:
+      routingMode: REGIONAL
+  providerConfigRef:
+    name: gcp-stack-template-provider-${{values.gcpProject}}
+---
+apiVersion: compute.gcp.crossplane.io/v1beta1
+kind: Subnetwork
+metadata:
+  name: ${{values.networkRef}}-sn
+  labels:
+    backstage.io/kubernetes-id: ${{values.component_id}}
+spec:
+  forProvider:
+    region: us-central1
+    ipCidrRange: "192.168.0.0/24"
+    privateIpGoogleAccess: true
+    secondaryIpRanges:
+      - rangeName: pods
+        ipCidrRange: 10.128.0.0/20
+      - rangeName: services
+        ipCidrRange: 172.16.0.0/16
+    networkRef:
+      name: ${{values.networkRef}}
+  providerConfigRef:
+    name: gcp-stack-template-provider-${{values.gcpProject}}
