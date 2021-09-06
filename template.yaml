@@ -26,7 +26,6 @@ spec:
         - cloudSqlTier
         - cloudSqlDataDiskType
         - cloudSqlDataDiskSizeGb
-        - k8s_apiserver_url
         - gcpProject
       properties:
         component_id:
@@ -79,10 +78,6 @@ spec:
           type: integer
           description: Cloud SQL data disk size (GB)
           default: 10
-        k8s_apiserver_url:
-          title: API Server URL of the Kubernetes cluster for Kerberus
-          type: string
-          description: API Server URL of the Kubernetes cluster for Kerberus
         gcpProject:
           title: Google Project ID where resources will be created
           type: string
@@ -119,7 +114,6 @@ spec:
           cloudSqlTier: "{{ parameters.cloudSqlTier }}"
           cloudSqlDataDiskType: "{{ parameters.cloudSqlDataDiskType }}"
           cloudSqlDataDiskSizeGb: "{{ parameters.cloudSqlDataDiskSizeGb }}"
-          k8s_apiserver_url: "{{ parameters.k8s_apiserver_url }}"
           gcpProject: "{{ parameters.gcpProject }}"
           destination: "{{ parseRepoUrl parameters.repoUrl }}"
 
