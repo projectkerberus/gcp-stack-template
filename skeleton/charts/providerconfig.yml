@@ -1,7 +1,7 @@
 apiVersion: gcp.crossplane.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: gcp-stack-template-provider-${{values.gcpProject}}
+  name: gcp-stack-template-provider-${{values.gcpProject}}-${{values.destination.repo}}
 spec:
   # replace this with your own gcp project id
   projectID: ${{values.gcpProject}}
