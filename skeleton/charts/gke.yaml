@@ -46,7 +46,7 @@ spec:
     podSecurityPolicyConfig:
       enabled: true
   providerConfigRef:
-    name: gcp-stack-template-provider-${{values.gcpProject}}
+    name: gcp-stack-template-provider-${{values.gcpProject}}-${{values.destination.repo}}
 ---
 apiVersion: container.gcp.crossplane.io/v1alpha1
 kind: NodePool
@@ -83,4 +83,4 @@ spec:
     locations:
       - "northamerica-northeast1-a"
   providerConfigRef:
-    name: gcp-stack-template-provider-${{values.gcpProject}}
+    name: gcp-stack-template-provider-${{values.gcpProject}}-${{values.destination.repo}}

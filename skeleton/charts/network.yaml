@@ -11,7 +11,7 @@ spec:
     routingConfig:
       routingMode: REGIONAL
   providerConfigRef:
-    name: gcp-stack-template-provider-${{values.gcpProject}}
+    name: gcp-stack-template-provider-${{values.gcpProject}}-${{values.destination.repo}}
 ---
 apiVersion: compute.gcp.crossplane.io/v1beta1
 kind: Subnetwork
@@ -32,4 +32,4 @@ spec:
     networkRef:
       name: ${{values.networkRef}}
   providerConfigRef:
-    name: gcp-stack-template-provider-${{values.gcpProject}}
+    name: gcp-stack-template-provider-${{values.gcpProject}}-${{values.destination.repo}}
