@@ -1,5 +1,5 @@
 site_name: "Google Cloud infrastructure template"
-site_description: ${{values.component_id | dump}}
+site_description: "Google Cloud infrastructure template"
 
 nav:
   - Introduction: index.md
