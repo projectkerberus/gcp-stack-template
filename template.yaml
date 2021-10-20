@@ -27,6 +27,7 @@ spec:
         - cloudSqlDataDiskType
         - cloudSqlDataDiskSizeGb
         - gcpProject
+        - owner
       properties:
         component_id:
           title: Name
@@ -82,6 +83,14 @@ spec:
           title: Google Project ID where resources will be created
           type: string
           description: Google Project ID where resources will be created
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
 
     - title: Choose a location
       required:
@@ -115,6 +124,7 @@ spec:
           cloudSqlDataDiskType: "{{ parameters.cloudSqlDataDiskType }}"
           cloudSqlDataDiskSizeGb: "{{ parameters.cloudSqlDataDiskSizeGb }}"
           gcpProject: "{{ parameters.gcpProject }}"
+          owner: "{{ parameters.owner }}"
           destination: "{{ parseRepoUrl parameters.repoUrl }}"
 
     - id: publish
@@ -136,6 +146,12 @@ spec:
     - id: argocd
       name: Create application on ArgoCD
       action: kerberus:argocd
+      input:
+        host: ${{parameters.repoUrl}}
+
+    - id: githubprotection
+      name: Set GitHub branch protection
+      action: kerberus:githubprotection
       input:
         host: ${{parameters.repoUrl}}
 
